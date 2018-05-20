@@ -5,7 +5,11 @@
   <meta charset="utf-8">
   <title>Giphy Fun</title>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript"></script>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -13,9 +17,9 @@
     <div class="row pt-2 pb-2">
       <div class="col-md-1"></div>
       <div class="col-md-10">
-          <hr>
-          <div id="buttonList">
-          </div>
+        <hr>
+        <div id="buttonList">
+        </div>
       </div>
 
     </div>
@@ -23,30 +27,37 @@
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-3">
-          <div id="inputField">
-                  <label for="newAnimal">Add Another Animal:</label><br>
-                  <input type="text" id="newAnimal" class="form-control"><br>
-                  <button type="button" class="btn btn-secondary submit">Submit</button><br>
-          </div>
+        <div id="inputField">
+          <label for="newAnimal">Add Another Animal:</label><br>
+          <input type="text" id="newAnimal" class="form-control"><br>
+          <button type="button" class="btn btn-secondary submit">Submit</button><br>
+        </div>
       </div>
     </div>
     
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-10">
-          <hr><br>
-          <div id="gifs-appear-here">
-          </div>
+        <hr><br>
+        <h1 id="gif-label" class="ml-3"></h1><br>
+        <div id="gifs-appear-here">
+        </div>
       </div>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript">
+  <footer class="footer mt-3">
+    <div class="container footercontainer text-center">
+      <span class="footertext">&copy; 2018 Susan Marek</span>
+    </div>
+  </footer>
 
-        var animalList = ["Cat", "Dog", "Hamster", "Fox", "Deer", "Racoon", "Lizard", "Eagle"]  
-        function renderButtons() {
-        $("#buttonList").empty();
+<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    var animalList = ["Cat", "Dog", "Hamster", "Fox", "Deer", "Racoon", "Lizard", "Eagle"]  
+    function renderButtons() {
+      $("#buttonList").empty();
           // Loop through the animals, generate buttons for each animal in the array
           for (var i = 0; i<animalList.length; i++) {
             var addButton = $("<button>");
@@ -57,11 +68,11 @@
           }
         };
 
-          $(".submit").on("click", function(event) {
+        $(".submit").on("click", function(event) {
             // event.preventDefault() prevents submit button from trying to send a form.
             event.preventDefault();
              // grab the text the user types into the input field
-            var addAnimal = $("#newAnimal").val().trim();
+             var addAnimal = $("#newAnimal").val().trim();
             // add the new animal to the array
             animalList.push(addAnimal);
             renderButtons();
@@ -70,34 +81,34 @@
           });
 
 
-          $(document).on("click", ".animalButton", function() {
-            $("#gifs-appear-here").empty();
-            var animalx = $(this).attr("data-animal");
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            animalx + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
+        $(document).on("click", ".animalButton", function() {
+          $("#gifs-appear-here").empty();
+          var animalx = $(this).attr("data-animal");
+          var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+          animalx + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
 
-            $.ajax({
-              url: queryURL,
-              method: "GET"
-            })
-            .done(function(response) {
-              console.log(response);
-              var results = response.data;
+          $.ajax({
+            url: queryURL,
+            method: "GET"
+          })
+          .done(function(response) {
+            console.log(response);
+            var results = response.data;
 
-              for (var i = 0; i < results.length; i++) {
-                var gifDiv = $("<div class='item float-left ml-3'>");
+            for (var i = 0; i < results.length; i++) {
+              var gifDiv = $("<div class='item float-left ml-3'>");
 
-                var rating = results[i].rating;
+              var rating = results[i].rating;
 
-                var p = $("<p>").text("Rating: " + rating);
+              var p = $("<p>").text("Rating: " + rating);
 
-                var animalImage = $("<img>");
-                animalImage.attr("src", results[i].images.fixed_height_still.url);
+              var animalImage = $("<img>");
+              animalImage.attr("src", results[i].images.fixed_height_still.url);
 
-                animalImage.attr("data-still", results[i].images.fixed_height_still.url);
-                animalImage.attr("data-animate", results[i].images.fixed_height.url);
-                animalImage.attr("data-state", "still");
-                animalImage.addClass("gif");
+              animalImage.attr("data-still", results[i].images.fixed_height_still.url);
+              animalImage.attr("data-animate", results[i].images.fixed_height.url);
+              animalImage.attr("data-state", "still");
+              animalImage.addClass("gif");
 
                 // gifDiv.addClass("float-left");
                 gifDiv.prepend(p);
@@ -106,12 +117,12 @@
                 $("#gifs-appear-here").prepend(gifDiv);
               }
             });
-          });
+        });
 
 
 
-              $(document).on("click", ".gif", function() {
-                console.log("gif was clicked");
+        $(document).on("click", ".gif", function() {
+          console.log("gif was clicked");
                 // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
                 var state = $(this).attr("data-state");
                 // If the clicked image's state is still, update its src attribute to what its data-animate value is.
@@ -127,9 +138,10 @@
               });
 
 
-   renderButtons();
+        renderButtons();
 
-  </script>
-  </body>
+      </script> -->
+    </body>
+    <script src ="assets/javascript/gifs.js"></script>
 
-  </html>
+    </html>
