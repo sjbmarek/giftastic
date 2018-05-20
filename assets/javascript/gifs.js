@@ -20,8 +20,10 @@ var animalList = ["Cat", "Dog", "Hamster", "Fox", "Deer", "Racoon", "Lizard", "E
      // grab the text the user types into the input field
      var addAnimal = $("#newAnimal").val().trim();
     // add the new animal to the array
-    animalList.push(addAnimal);
-    renderButtons();
+    if (addAnimal.length>0 && (/^[a-zA-Z]+$/.test(addAnimal))) {
+      animalList.push(addAnimal);
+      renderButtons();
+     };
     // clear the input field
     $("#newAnimal").val(" ");
   });
@@ -33,7 +35,7 @@ var animalList = ["Cat", "Dog", "Hamster", "Fox", "Deer", "Racoon", "Lizard", "E
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
     animalx + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
 
-     $("#gif-label").text("Best gifs for: " + animalx);
+     $("#gif-label").text("Ten popular gifs for: " + animalx.toUpperCase());
 
     $.ajax({
       url: queryURL,
