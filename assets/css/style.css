@@ -32,3 +32,8 @@ html {
 .shadow {
     box-shadow: 6px 3px 20px 0px rgba(116,116,116,0.73);
 }
+
+#gif-label{
+    height: 40px;
+    border-radius: 3px;
+}
