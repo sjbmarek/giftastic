@@ -10,23 +10,28 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
+  <script src="https://code.jquery.com/jquery.js"></script>
+
 
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
+
+
   <div class="bg-dark sticky-top shadow">
     <div class="row">
       <div class="col-md-2"></div>
-      <div class="col-md-8">
-
+      <div class="col-md-6">
         <h1 class="py-3 text-light">Giphy Fun</h1>
+      </div>
+      <div class="col-md-2">
+
+        <button type="button" class="btn btn-dark mt-4 float-right" data-toggle="modal" data-target=".bd-example-modal-lg">About</button>
       </div>
 
     </div>
   </div>
-
-
 
   <div class="container">
     <div class="row pt-2 pb-2">
@@ -54,12 +59,14 @@
       <div class="col-md-1"></div>
       <div class="col-md-10 m-0">
         <hr><br>
-        <h4 id="gif-label" class=" pl-3 bg-info text-light"></h4><br>
+        <h5 id="gif-label" class=" pl-3 bg-info text-light"></h5><br>
         <div id="gifs-appear-here">
         </div>
       </div>
     </div>
   </div>
+
+
 
   <footer class="footer mt-3">
     <div class="container footercontainer text-center">
@@ -67,95 +74,35 @@
     </div>
   </footer>
 
-<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-
-    var animalList = ["Cat", "Dog", "Hamster", "Fox", "Deer", "Racoon", "Lizard", "Eagle"]  
-    function renderButtons() {
-      $("#buttonList").empty();
-          // Loop through the animals, generate buttons for each animal in the array
-          for (var i = 0; i<animalList.length; i++) {
-            var addButton = $("<button>");
-            addButton.addClass("animalButton btn btn-info m-1");
-            addButton.attr("data-animal", animalList[i]);
-            addButton.text(animalList[i]);
-            $("#buttonList").append(addButton);
-          }
-        };
-
-        $(".submit").on("click", function(event) {
-            // event.preventDefault() prevents submit button from trying to send a form.
-            event.preventDefault();
-             // grab the text the user types into the input field
-             var addAnimal = $("#newAnimal").val().trim();
-            // add the new animal to the array
-            animalList.push(addAnimal);
-            renderButtons();
-            // clear the input field
-            $("#newAnimal").val(" ");
-          });
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Giphy Fun</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li>A fun application to test out the GIPHY API and return the results on the page.</li>  
+          <li>Dynamic addition of buttons with alpha only validation.</li> 
+          <li>This modal too!</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-        $(document).on("click", ".animalButton", function() {
-          $("#gifs-appear-here").empty();
-          var animalx = $(this).attr("data-animal");
-          var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-          animalx + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
-
-          $.ajax({
-            url: queryURL,
-            method: "GET"
-          })
-          .done(function(response) {
-            console.log(response);
-            var results = response.data;
-
-            for (var i = 0; i < results.length; i++) {
-              var gifDiv = $("<div class='item float-left ml-3'>");
-
-              var rating = results[i].rating;
-
-              var p = $("<p>").text("Rating: " + rating);
-
-              var animalImage = $("<img>");
-              animalImage.attr("src", results[i].images.fixed_height_still.url);
-
-              animalImage.attr("data-still", results[i].images.fixed_height_still.url);
-              animalImage.attr("data-animate", results[i].images.fixed_height.url);
-              animalImage.attr("data-state", "still");
-              animalImage.addClass("gif");
-
-                // gifDiv.addClass("float-left");
-                gifDiv.prepend(p);
-                gifDiv.prepend(animalImage);
-
-                $("#gifs-appear-here").prepend(gifDiv);
-              }
-            });
-        });
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
 
-
-        $(document).on("click", ".gif", function() {
-          console.log("gif was clicked");
-                // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-                var state = $(this).attr("data-state");
-                // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-                // Then, set the image's data-state to animate
-                // Else set src to the data-still value
-                if (state === "still") {
-                  $(this).attr("src", $(this).attr("data-animate"));
-                  $(this).attr("data-state", "animate");
-                } else {
-                  $(this).attr("src", $(this).attr("data-still"));
-                  $(this).attr("data-state", "still");
-                }
-              });
-
-
-        renderButtons();
-
-      </script> -->
     </body>
     <script src ="assets/javascript/gifs.js"></script>
 

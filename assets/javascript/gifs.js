@@ -87,5 +87,19 @@ var animalList = ["Cat", "Dog", "Hamster", "Fox", "Deer", "Racoon", "Lizard", "E
     }
   });
 
+
+   // $(document).on("click", "#buttonmodal", function() {
+   //  event.preventDefault();
+   //  console.log("about was clicked");
+   //  $('#about').trigger('focus');
+
+
+   //    });
+
+//    $('#about').on('shown.bs.modal', function () {
+//     console.log("about was clicked");
+//   $('#buttonmodal').trigger('focus');
+// });
+
   renderButtons();
 
